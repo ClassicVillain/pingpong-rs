@@ -1,0 +1,24 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build",
+            "type": "shell",
+            "command": "taskkill /f /im pingpong-rs.exe ; cargo run main.rs",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+              }
+            // "args": [
+            //     // Ask msbuild to generate full paths for file names.
+            //     "/property:GenerateFullPaths=true",
+            //     "/t:build",
+            //     // Do not generate summary otherwise it leads to duplicate errors in Problems panel
+            //     "/consoleloggerparameters:NoSummary"
+            // ],
+            
+        }
+    ]
+}
