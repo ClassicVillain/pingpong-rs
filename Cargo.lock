@@ -1955,6 +1955,12 @@ dependencies = [
 ]
 
 [[package]]
+name = "keyboard"
+version = "0.0.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "2fd473e684431fe2853c430741df4b4b0dcc5b8e177e57f57368dad0cf556dbe"
+
+[[package]]
 name = "khronos-egl"
 version = "4.1.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -2557,6 +2563,7 @@ name = "pingpong-rs"
 version = "0.1.0"
 dependencies = [
  "bevy",
+ "keyboard",
  "rand",
 ]
 

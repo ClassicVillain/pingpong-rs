@@ -328,23 +328,33 @@ fn pad_movement(
 }
 
 fn text_update(
-
+    left_query: Query<&mut Text, (With(LeftScoreText), Without(RightScoreText))>,
+    right_query: Query<&mut Text, (With(RightScoreText), Without(LeftScoreText))>,
+    score: Res<Score>,
 ){
-
+    for mut text in &mut left_query {
+        text.sections[0].value = format!("{score.left_score}")
+    }
+    for mut text in &mut right_query {
+        text.sections[0].value = format!("{score.right_score}")
+    }
 }
 
 fn restart(
     mut ball_vel: ResMut<BallVelocity>,
     keyboard_input: Res<Input<KeyCode>>,
     mut ball_query: Query<&mut Transform, (With<Ball>, Without<LeftPad>, Without<RightPad>)>,
+    mut score: ResMut<Score>,
 ) {
     let mut ball_transform = ball_query.single_mut();
     
     // if keyboard_input.just_pressed(KeyCode::R) {
-        if ball_transform.translation.x >= GAME_FRAME_POSITION.x + GAME_FRAME_WIDTH / 2. - BALL_SIZE / 2. {
+        if ball_transform.translation.x >= GAME_FRAME_POSITION.x + GAME_FRAME_WIDTH / 2. {
+            score.left_score += 1.;
             ball_transform.translation = Vec3::new(rand::thread_rng().gen_range(-10.0..=10.0), rand::thread_rng().gen_range(-100.0..=100.0), 3.);
             ball_vel.0 = Vec2::new(if rand::thread_rng().gen_bool(0.5) { 1. } else { -1. }, if rand::thread_rng().gen_bool(0.5) { 1. } else { -1. });
-        } else if ball_transform.translation.x <= GAME_FRAME_POSITION.x - GAME_FRAME_WIDTH / 2. + BALL_SIZE / 2. {  
+        } else if ball_transform.translation.x <= GAME_FRAME_POSITION.x - GAME_FRAME_WIDTH / 2. {  
+            score.right_score += 1.;
             ball_transform.translation = Vec3::new(rand::thread_rng().gen_range(-10.0..=10.0), rand::thread_rng().gen_range(-100.0..=100.0), 3.);
             ball_vel.0 = Vec2::new(if rand::thread_rng().gen_bool(0.5) { 1. } else { -1. }, if rand::thread_rng().gen_bool(0.5) { 1. } else { -1. });
         }
