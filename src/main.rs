@@ -167,7 +167,6 @@ fn startup(
         FpsText,
     ));
 
-
     commands
         .spawn(NodeBundle {
             style: Style {
@@ -307,21 +306,6 @@ fn ball_collision(
         }
     }
 
-    // if ball_transform.translation.x
-    //     >= GAME_FRAME_POSITION.x + GAME_FRAME_WIDTH / 2. - BALL_SIZE / 2.
-    // {
-    //     if ball_vel.0.x > 0. {
-    //         ball_vel.0.x *= -1.
-    //     }
-    // } else if ball_transform.translation.x
-    //     <= GAME_FRAME_POSITION.x - GAME_FRAME_WIDTH / 2. + BALL_SIZE / 2.
-    // {
-    //     if ball_vel.0.x < 0. {
-    //         ball_vel.0.x *= -1.
-    //     }
-    // }
-
-
     if ball_transform.translation.x + BALL_SIZE/2. >= (GAME_FRAME_WIDTH/2. - 20.) - PAD_WIDTH/2. && ball_transform.translation.x - BALL_SIZE/2. <= (GAME_FRAME_WIDTH/2. - 20.) {
         if ball_transform.translation.y - BALL_SIZE/2. <= right_pad_transform.translation.y + game_resources.pad_height/2. && ball_transform.translation.y + BALL_SIZE/2. >= right_pad_transform.translation.y - game_resources.pad_height/2.{
             if game_resources.ball_velocity.x > 0. {
@@ -352,8 +336,6 @@ fn ball_collision(
             }
         }
     }
-
-
 }
 
 fn pad_movement(
